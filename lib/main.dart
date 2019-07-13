@@ -2,52 +2,81 @@ import 'package:flutter_web/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+typedef ThemeColorSwitch = void Function(Color color);
+
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  Color _themeColor = Colors.blue;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'H DESIGN',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: this._themeColor,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(
+        title: 'H Design Home Page',
+        themeColorSwitch: (color) {
+          this.setState(() => this._themeColor = color);
+        },
+      ),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.themeColorSwitch}) : super(key: key);
 
   final String title;
+  final ThemeColorSwitch themeColorSwitch;
 
   @override
   Widget build(BuildContext context) {
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
+        leading: InkWell(
+          child: Icon(Icons.menu),
+          onTap: () {
+            print('menu');
+          },
+        ),
         title: Text(title),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: PopupMenuButton<Color>(
+              tooltip: 'Theme',
+              itemBuilder: (BuildContext context) {
+                return <PopupMenuItem<Color>>[
+                  PopupMenuItem<Color>(
+                    value: Colors.blue,
+                    child: Text(
+                      'blue',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  PopupMenuItem<Color>(
+                    value: Colors.deepOrange,
+                    child: Text(
+                      'deepOrange',
+                      style: TextStyle(color: Colors.deepOrange),
+                    ),
+                  ),
+                ];
+              },
+              onSelected: (color) => this.themeColorSwitch(color),
+              icon: Icon(Icons.format_paint),
+            ),
+          )
+        ],
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (choose the "Toggle Debug Paint" action
-          // from the Flutter Inspector in Android Studio, or the "Toggle Debug
-          // Paint" command in Visual Studio Code) to see the wireframe for each
-          // widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
@@ -55,7 +84,7 @@ class MyHomePage extends StatelessWidget {
             ),
           ],
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
