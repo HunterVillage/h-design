@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="D:/Dev/Projects/GitHub/hunter/admin" value="PREVIEW" />
+        <entry key="D:/Dev/Projects/GitHub/hunter/immune" value="PREVIEW" />
+        <entry key="D:/Dev/Projects/Shinow/lsp-service/admin" value="PREVIEW" />
+        <entry key="D:/Dev/Projects/Shinow/lsp-service/immune" value="PREVIEW" />
+        <entry key="D:/Dev/Projects/Shinow/lsp-service/joint" value="PREVIEW" />
+        <entry key="D:/Dev/Projects/abc-domain-rear-service" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../GitHub/hunter/admin" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../GitHub/hunter/immune" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../GitHub/t1/android" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../Shinow/abc-base-system-management" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../Shinow/lsp-service/security" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="D:/Dev/AndroidSDk" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="last_opened_file_path" value="D:/Dev/Java/jdk1.8.0_201/bin/jvisualvm.exe" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.index.html">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" uri="http://localhost:63342/h-design/web/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
