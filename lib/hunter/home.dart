@@ -1,7 +1,8 @@
 import 'package:flutter_web/material.dart';
-import 'package:h_design/main.dart';
+import 'package:h_design/hunter/custom_popup.dart';
+import 'package:h_design/hunter/settings_menu.dart';
 
-const Color _kFlutterBlue = Color(0xFF003D75);
+import 'custom_function.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title, this.themeDataSwitch}) : super(key: key);
@@ -40,12 +41,20 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
           Container(
             width: 80,
             child: InkWell(
-              child: Icon(Icons.menu),
+              child: Icon(Icons.settings),
               onTap: () {
-                final ThemeData _themeData = isDark
-                    ? ThemeData(primarySwatch: Colors.cyan, brightness: Brightness.light)
-                    : ThemeData(primarySwatch: Colors.blueGrey, brightness: Brightness.dark);
-                this.widget.themeDataSwitch(_themeData);
+                Navigator.push(
+                  context,
+                  PopRoute(
+                    child: CustomPopup(
+                      right: 0,
+                      top: 0,
+                      child: SettingsMenu(
+                        themeDataSwitch: this.widget.themeDataSwitch,
+                      ),
+                    ),
+                  ),
+                );
               },
             ),
           )
@@ -57,7 +66,6 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
           child: Icon(
             Icons.adb,
             size: 54.0,
-            color: isDark ? Colors.white : _kFlutterBlue,
           ),
         ),
       ),

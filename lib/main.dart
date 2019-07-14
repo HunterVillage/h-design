@@ -1,10 +1,9 @@
 import 'package:flutter_web/material.dart';
+import 'package:h_design/hunter/custom_theme.dart';
 
 import 'hunter/home.dart';
 
 void main() => runApp(MyApp());
-
-typedef ThemeDataSwitch = void Function(ThemeData themeData);
 
 class MyApp extends StatefulWidget {
   @override
@@ -12,13 +11,19 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  ThemeData _themeData = ThemeData(primarySwatch: Colors.cyan, brightness: Brightness.light);
+  ThemeData _themeData;
+
+  @override
+  void initState() {
+    super.initState();
+    this._themeData = lightTheme;
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'H DESIGN',
-      theme: _themeData,
+      title: 'H-DESIGN',
+      theme: this._themeData,
       home: HomePage(
         title: 'H Design Home Page',
         themeDataSwitch: (themeData) {
