@@ -1,5 +1,6 @@
 import 'package:flutter_web/material.dart';
 import 'package:h_design/hunter/custom_popup.dart';
+import 'package:h_design/hunter/router_pool.dart';
 import 'package:h_design/hunter/settings_menu.dart';
 
 import 'custom_function.dart';
@@ -62,11 +63,32 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
       ),
       body: SafeArea(
         bottom: false,
-        child: Center(
-          child: Icon(
-            Icons.adb,
-            size: 54.0,
-          ),
+        child: Wrap(
+          children: indexModels.map((model) {
+            return GestureDetector(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.3333,
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: Card(
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 4,
+                        child: model.icon,
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(model.label),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => model.target),
+              ),
+            );
+          }).toList(),
         ),
       ),
     );
