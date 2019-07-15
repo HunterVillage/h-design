@@ -68,7 +68,7 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
                 height: MediaQuery.of(context).size.height * 0.25,
                 child: Card(
                   child: Column(
-                    children: <Widget>[Expanded(flex: 4, child: model.icon), Expanded(flex: 1, child: Text(model.label))],
+                    children: <Widget>[Expanded(flex: 4, child: Icon(model.iconData, size: 55)), Expanded(flex: 1, child: Text(model.label))],
                   ),
                 ),
               ),

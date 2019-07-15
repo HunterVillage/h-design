@@ -6,20 +6,14 @@ import 'router_model.dart';
 List<RouterModel> indexModels = [
   RouterModel(
     id: 'alpha',
-    icon: Icon(
-      Icons.format_paint,
-      size: 55,
-    ),
+    iconData: Icons.format_paint,
     label: '阿尔法',
     sort: 0,
     routerHandler: (RouterModel routerModel) => Alpha(routerModel),
   ),
   RouterModel(
     id: 'bata',
-    icon: Icon(
-      Icons.child_friendly,
-      size: 55,
-    ),
+    iconData: Icons.child_friendly,
     label: '贝塔',
     sort: 0,
     routerHandler: (RouterModel routerModel) => Center(
@@ -28,10 +22,7 @@ List<RouterModel> indexModels = [
   ),
   RouterModel(
     id: 'delta',
-    icon: Icon(
-      Icons.vpn_lock,
-      size: 55,
-    ),
+    iconData: Icons.vpn_lock,
     label: '德尔塔',
     sort: 0,
     routerHandler: (RouterModel routerModel) => Center(
@@ -40,10 +31,7 @@ List<RouterModel> indexModels = [
   ),
   RouterModel(
     id: 'epsilon',
-    icon: Icon(
-      Icons.track_changes,
-      size: 55,
-    ),
+    iconData: Icons.track_changes,
     label: '伊普斯龙',
     sort: 0,
     routerHandler: (RouterModel routerModel) => Center(
