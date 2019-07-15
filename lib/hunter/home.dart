@@ -2,6 +2,7 @@ import 'package:flutter_web/material.dart';
 import 'package:h_design/hunter/custom_popup.dart';
 import 'package:h_design/hunter/router_pool.dart';
 import 'package:h_design/hunter/settings_menu.dart';
+import 'package:h_design/hunter/widgets/actions.dart';
 
 import 'custom_function.dart';
 
@@ -16,8 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   void initState() {
     super.initState();
@@ -36,24 +35,7 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
       leading: Icon(Icons.home),
       title: Text('H-Design'),
       actions: <Widget>[
-        Container(
-          width: 80,
-          child: InkWell(
-            child: Icon(Icons.settings),
-            onTap: () {
-              Navigator.push(
-                context,
-                PopRoute(
-                  child: CustomPopup(
-                    right: 0,
-                    top: 0,
-                    child: SettingsMenu(themeDataSwitch: this.widget.themeDataSwitch),
-                  ),
-                ),
-              );
-            },
-          ),
-        )
+        settingAction(context, themeDataSwitch: this.widget.themeDataSwitch),
       ],
     );
     Widget body = SafeArea(
@@ -79,7 +61,6 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
       ),
     );
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: isDark ? const Color(0xFF202124) : Colors.white,
       appBar: appBar,
       body: body,
