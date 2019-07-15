@@ -1,49 +1,26 @@
 import 'package:flutter_web/material.dart';
 import 'package:h_design/hunter/router_model.dart';
+import 'package:h_design/hunter/router_pool.dart';
 import 'package:h_design/hunter/widgets/actions.dart';
 import 'package:h_design/main.dart';
 
-
-class _Page {
-  const _Page({this.icon, this.text});
-
-  final IconData icon;
-  final String text;
-}
-
-const List<_Page> _allPages = <_Page>[
-  _Page(icon: Icons.grade, text: 'TRIUMPH'),
-  _Page(icon: Icons.playlist_add, text: 'NOTE'),
-  _Page(icon: Icons.check_circle, text: 'SUCCESS'),
-  _Page(icon: Icons.question_answer, text: 'OVERSTATE'),
-  _Page(icon: Icons.sentiment_very_satisfied, text: 'SATISFACTION'),
-  _Page(icon: Icons.camera, text: 'APERTURE'),
-  _Page(icon: Icons.assignment_late, text: 'WE MUST'),
-  _Page(icon: Icons.assignment_turned_in, text: 'WE CAN'),
-  _Page(icon: Icons.group, text: 'ALL'),
-  _Page(icon: Icons.block, text: 'EXCEPT'),
-  _Page(icon: Icons.sentiment_very_dissatisfied, text: 'CRYING'),
-  _Page(icon: Icons.error, text: 'MISTAKE'),
-  _Page(icon: Icons.loop, text: 'TRYING'),
-  _Page(icon: Icons.cake, text: 'CAKE'),
-];
-
-class Alpha extends StatefulWidget {
+class Bundle extends StatefulWidget {
   final RouterModel model;
+  final List<Page> pages;
 
-  Alpha(this.model);
+  Bundle(this.model, this.pages);
 
   @override
-  State<StatefulWidget> createState() => AlphaState();
+  State<StatefulWidget> createState() => BundleState();
 }
 
-class AlphaState extends State<Alpha> with SingleTickerProviderStateMixin {
+class BundleState extends State<Bundle> with SingleTickerProviderStateMixin {
   TabController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(vsync: this, length: _allPages.length);
+    _controller = TabController(vsync: this, length: this.widget.pages.length);
   }
 
   @override
@@ -67,7 +44,7 @@ class AlphaState extends State<Alpha> with SingleTickerProviderStateMixin {
         bottom: TabBar(
           controller: _controller,
           isScrollable: true,
-          tabs: _allPages.map<Tab>((_Page page) {
+          tabs: this.widget.pages.map<Tab>((Page page) {
             return Tab(text: page.text, icon: Icon(page.icon));
             ;
           }).toList(),
@@ -75,7 +52,7 @@ class AlphaState extends State<Alpha> with SingleTickerProviderStateMixin {
       ),
       body: TabBarView(
           controller: _controller,
-          children: _allPages.map<Widget>((_Page page) {
+          children: this.widget.pages.map<Widget>((Page page) {
             return SafeArea(
               top: false,
               bottom: false,
