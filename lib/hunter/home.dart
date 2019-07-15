@@ -32,65 +32,57 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: isDark ? const Color(0xFF202124) : Colors.white,
-      appBar: AppBar(
-        leading: Icon(Icons.home),
-        title: Text('H-Design'),
-        actions: <Widget>[
-          Container(
-            width: 80,
-            child: InkWell(
-              child: Icon(Icons.settings),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  PopRoute(
-                    child: CustomPopup(
-                      right: 0,
-                      top: 0,
-                      child: SettingsMenu(
-                        themeDataSwitch: this.widget.themeDataSwitch,
-                      ),
-                    ),
+    Widget appBar = AppBar(
+      leading: Icon(Icons.home),
+      title: Text('H-Design'),
+      actions: <Widget>[
+        Container(
+          width: 80,
+          child: InkWell(
+            child: Icon(Icons.settings),
+            onTap: () {
+              Navigator.push(
+                context,
+                PopRoute(
+                  child: CustomPopup(
+                    right: 0,
+                    top: 0,
+                    child: SettingsMenu(themeDataSwitch: this.widget.themeDataSwitch),
                   ),
-                );
-              },
-            ),
-          )
-        ],
-      ),
-      body: SafeArea(
-        bottom: false,
-        child: Wrap(
-          children: indexModels.map((model) {
-            return GestureDetector(
+                ),
+              );
+            },
+          ),
+        )
+      ],
+    );
+    Widget body = SafeArea(
+      bottom: false,
+      child: Wrap(
+        children: indexModels.map((model) {
+          return Hero(
+            tag: model.id,
+            child: GestureDetector(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.3333,
                 height: MediaQuery.of(context).size.height * 0.25,
                 child: Card(
                   child: Column(
-                    children: <Widget>[
-                      Expanded(
-                        flex: 4,
-                        child: model.icon,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Text(model.label),
-                      )
-                    ],
+                    children: <Widget>[Expanded(flex: 4, child: model.icon), Expanded(flex: 1, child: Text(model.label))],
                   ),
                 ),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => model.target),
-              ),
-            );
-          }).toList(),
-        ),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => model.routerHandler(model))),
+            ),
+          );
+        }).toList(),
       ),
+    );
+    return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: isDark ? const Color(0xFF202124) : Colors.white,
+      appBar: appBar,
+      body: body,
     );
   }
 }

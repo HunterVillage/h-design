@@ -1,4 +1,5 @@
 import 'package:flutter_web/material.dart';
+import 'package:h_design/hunter/views/alpha_home.dart';
 
 import 'router_model.dart';
 
@@ -11,9 +12,7 @@ List<RouterModel> indexModels = [
     ),
     label: '阿尔法',
     sort: 0,
-    target: Center(
-      child: Text('Alpha-Router'),
-    ),
+    routerHandler: (RouterModel routerModel) => Alpha(routerModel),
   ),
   RouterModel(
     id: 'bata',
@@ -23,7 +22,7 @@ List<RouterModel> indexModels = [
     ),
     label: '贝塔',
     sort: 0,
-    target: Center(
+    routerHandler: (RouterModel routerModel) => Center(
       child: Text('Bata-Router'),
     ),
   ),
@@ -35,7 +34,7 @@ List<RouterModel> indexModels = [
     ),
     label: '德尔塔',
     sort: 0,
-    target: Center(
+    routerHandler: (RouterModel routerModel) => Center(
       child: Text('Delta-Router'),
     ),
   ),
@@ -47,7 +46,7 @@ List<RouterModel> indexModels = [
     ),
     label: '伊普斯龙',
     sort: 0,
-    target: Center(
+    routerHandler: (RouterModel routerModel) => Center(
       child: Text('Epsilon-Router'),
     ),
   ),
