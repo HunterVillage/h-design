@@ -2,19 +2,18 @@ import 'package:flutter_web/material.dart';
 import 'package:h_design/hunter/router_model.dart';
 import 'package:h_design/hunter/router_pool.dart';
 import 'package:h_design/hunter/widgets/actions.dart';
-import 'package:h_design/main.dart';
 
-class Bundle extends StatefulWidget {
+class BundleGroup extends StatefulWidget {
   final RouterModel model;
-  final List<Page> pages;
+  final List<RouterModel> pages;
 
-  Bundle(this.model, this.pages);
+  BundleGroup(this.model, this.pages);
 
   @override
-  State<StatefulWidget> createState() => BundleState();
+  State<StatefulWidget> createState() => BundleGroupState();
 }
 
-class BundleState extends State<Bundle> with SingleTickerProviderStateMixin {
+class BundleGroupState extends State<BundleGroup> with SingleTickerProviderStateMixin {
   TabController _controller;
 
   @override
@@ -44,26 +43,26 @@ class BundleState extends State<Bundle> with SingleTickerProviderStateMixin {
         bottom: TabBar(
           controller: _controller,
           isScrollable: true,
-          tabs: this.widget.pages.map<Tab>((Page page) {
-            return Tab(text: page.text, icon: Icon(page.icon));
+          tabs: this.widget.pages.map<Tab>((RouterModel routerModel) {
+            return Tab(text: routerModel.label, icon: Icon(routerModel.iconData));
           }).toList(),
         ),
       ),
       body: TabBarView(
           controller: _controller,
-          children: this.widget.pages.map<Widget>((Page page) {
+          children: this.widget.pages.map<Widget>((RouterModel routerModel) {
             return SafeArea(
               top: false,
               bottom: false,
               child: Container(
-                key: ObjectKey(page.icon),
+                key: ObjectKey(routerModel.iconData),
                 padding: const EdgeInsets.all(12.0),
                 child: Card(
                   child: Center(
                     child: Icon(
-                      page.icon,
+                      routerModel.iconData,
                       size: 128.0,
-                      semanticLabel: 'Placeholder for ${page.text} tab',
+                      semanticLabel: 'Placeholder for ${routerModel.label} tab',
                     ),
                   ),
                 ),
