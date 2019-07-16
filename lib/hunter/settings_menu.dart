@@ -14,7 +14,6 @@ class SettingsMenu extends StatefulWidget {
 }
 
 class SettingMenuState extends State<SettingsMenu> {
-  ThemeData _themeData;
 
   @override
   void initState() {
