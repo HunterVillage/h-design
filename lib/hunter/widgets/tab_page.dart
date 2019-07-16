@@ -1,18 +1,18 @@
 import 'package:flutter_web/material.dart';
 import 'package:h_design/hunter/router_model.dart';
-import 'package:h_design/hunter/widgets/actions.dart';
+import 'package:h_design/hunter/actions.dart';
 
-class BundleGroup extends StatefulWidget {
+class TabPage extends StatefulWidget {
   final RouterModel model;
   final List<RouterModel> pages;
 
-  BundleGroup(this.model, this.pages);
+  TabPage(this.model, this.pages);
 
   @override
-  State<StatefulWidget> createState() => BundleGroupState();
+  State<StatefulWidget> createState() => TabPageState();
 }
 
-class BundleGroupState extends State<BundleGroup> with SingleTickerProviderStateMixin {
+class TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
   TabController _controller;
 
   @override
@@ -53,19 +53,7 @@ class BundleGroupState extends State<BundleGroup> with SingleTickerProviderState
             return SafeArea(
               top: false,
               bottom: false,
-              child: Container(
-                key: ObjectKey(routerModel.iconData),
-                padding: const EdgeInsets.all(12.0),
-                child: Card(
-                  child: Center(
-                    child: Icon(
-                      routerModel.iconData,
-                      size: 128.0,
-                      semanticLabel: 'Placeholder for ${routerModel.label} tab',
-                    ),
-                  ),
-                ),
-              ),
+              child: routerModel.routerHandler(routerModel),
             );
           }).toList()),
     );

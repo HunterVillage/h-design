@@ -1,6 +1,6 @@
 import 'package:flutter_web/material.dart';
 import 'package:h_design/hunter/router_pool.dart';
-import 'package:h_design/hunter/widgets/actions.dart';
+import 'package:h_design/hunter/actions.dart';
 
 import 'custom_function.dart';
 
