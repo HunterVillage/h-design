@@ -39,14 +39,13 @@ class BundleState extends State<Bundle> with SingleTickerProviderStateMixin {
         ),
         title: Text(this.widget.model.label),
         actions: <Widget>[
-          homeAction(context, targetPage: MyApp()),
+          homeAction(context),
         ],
         bottom: TabBar(
           controller: _controller,
           isScrollable: true,
           tabs: this.widget.pages.map<Tab>((Page page) {
             return Tab(text: page.text, icon: Icon(page.icon));
-            ;
           }).toList(),
         ),
       ),

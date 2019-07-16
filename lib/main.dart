@@ -30,6 +30,14 @@ class MyAppState extends State<MyApp> {
           this.setState(() => this._themeData = themeData);
         },
       ),
+      routes: <String, WidgetBuilder>{
+        '/home': (BuildContext context) => HomePage(
+              title: 'H Design Home Page',
+              themeDataSwitch: (themeData) {
+                this.setState(() => this._themeData = themeData);
+              },
+            ),
+      },
     );
   }
 }

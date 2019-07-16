@@ -3,7 +3,7 @@ import 'package:h_design/hunter/custom_function.dart';
 import 'package:h_design/hunter/custom_popup.dart';
 import 'package:h_design/hunter/settings_menu.dart';
 
-ActionBuild settingAction = (BuildContext context, {ThemeDataSwitch themeDataSwitch, Widget targetPage}) => SizedBox(
+ActionBuild settingAction = (BuildContext context, {ThemeDataSwitch themeDataSwitch}) => SizedBox(
       width: 80,
       child: InkWell(
         child: Icon(Icons.settings),
@@ -22,13 +22,13 @@ ActionBuild settingAction = (BuildContext context, {ThemeDataSwitch themeDataSwi
       ),
     );
 
-ActionBuild homeAction = (BuildContext context, {ThemeDataSwitch themeDataSwitch, Widget targetPage}) => SizedBox(
+ActionBuild homeAction = (BuildContext context, {ThemeDataSwitch themeDataSwitch}) => SizedBox(
       width: 80,
       child: InkWell(
-        onTap: () => Navigator.pushAndRemoveUntil(
+        onTap: () => Navigator.pushNamedAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (BuildContext context) => targetPage),
-          ModalRoute.withName('/'),
+          '/home',
+          (route) => route == null,
         ),
         child: Icon(Icons.home),
       ),
