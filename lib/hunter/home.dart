@@ -1,7 +1,5 @@
 import 'package:flutter_web/material.dart';
-import 'package:h_design/hunter/custom_popup.dart';
 import 'package:h_design/hunter/router_pool.dart';
-import 'package:h_design/hunter/settings_menu.dart';
 import 'package:h_design/hunter/widgets/actions.dart';
 
 import 'custom_function.dart';
@@ -42,19 +40,22 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
       bottom: false,
       child: Wrap(
         children: indexModels.map((model) {
-          return Hero(
-            tag: model.id,
-            child: GestureDetector(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.3333,
-                height: MediaQuery.of(context).size.height * 0.25,
+          return SizedBox(
+            width: MediaQuery.of(context).size.width * 0.3333,
+            height: MediaQuery.of(context).size.height * 0.25,
+            child: Hero(
+              tag: model.id,
+              child: GestureDetector(
                 child: Card(
                   child: Column(
-                    children: <Widget>[Expanded(flex: 4, child: Icon(model.iconData, size: 55)), Expanded(flex: 1, child: Text(model.label))],
+                    children: <Widget>[
+                      Expanded(flex: 4, child: Icon(model.iconData, size: 55)),
+                      Expanded(flex: 1, child: Text(model.label)),
+                    ],
                   ),
                 ),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => model.routerHandler(model))),
               ),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => model.routerHandler(model))),
             ),
           );
         }).toList(),
