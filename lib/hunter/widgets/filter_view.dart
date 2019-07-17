@@ -19,15 +19,22 @@ class FilterViewState extends State<FilterView> with SingleTickerProviderStateMi
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
-    _animation = Tween(begin: 36.0, end: this.widget.expandedHeight).animate(_controller)
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
+    final CurvedAnimation curve = CurvedAnimation(parent: this._controller, curve: Curves.easeInCubic);
+    _animation = Tween(begin: 34.0, end: this.widget.expandedHeight).animate(curve)
       ..addListener(() {
         setState(() {});
       });
     this._expanded = this.widget.expanded;
     if (this._expanded) {
-      this._controller.forward(from: 36.0);
+      this._controller.forward();
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    this._controller.dispose();
   }
 
   @override
@@ -37,22 +44,7 @@ class FilterViewState extends State<FilterView> with SingleTickerProviderStateMi
       child: ListView(
         children: <Widget>[
           Wrap(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(5),
-                child: SizedBox(
-                  width: 150,
-                  height: 30,
-                  child: TextField(
-                    enabled: true,
-                    decoration: const InputDecoration(
-                      labelText: '编号',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            children: <Widget>[],
           ),
         ],
       ),
@@ -63,7 +55,7 @@ class FilterViewState extends State<FilterView> with SingleTickerProviderStateMi
       margin: EdgeInsets.all(0),
       child: InkWell(
         child: Container(
-          padding: EdgeInsets.only(bottom: 6, top: 5),
+          padding: EdgeInsets.only(bottom: 6, top: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +74,7 @@ class FilterViewState extends State<FilterView> with SingleTickerProviderStateMi
           ),
         ),
         onTap: () {
-          this._expanded ? this._controller.reverse(from: this._animation.value) : this._controller.forward(from: this._animation.value);
+          this._expanded ? this._controller.reverse(from: this._animation.value) : this._controller.forward();
           this.setState(() => this._expanded = !this._expanded);
         },
       ),
@@ -126,7 +118,7 @@ class FilterViewState extends State<FilterView> with SingleTickerProviderStateMi
                 ],
               ),
               decoration: BoxDecoration(
-                border: Border.all(color: Theme.of(context).primaryColor, width: 2),
+                border: Border.all(color: Theme.of(context).primaryColor, width: 3),
               ),
             ),
           ),
