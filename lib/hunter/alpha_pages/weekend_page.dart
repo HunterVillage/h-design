@@ -1,6 +1,8 @@
 import 'package:flutter_web/material.dart';
 import 'package:h_design/hunter/router_model.dart';
 
+import 'table_list.dart';
+
 class WeekendPage extends StatefulWidget {
   final RouterModel routerModel;
 
@@ -13,18 +15,6 @@ class WeekendPage extends StatefulWidget {
 class WeekendPageState extends State<WeekendPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      key: ObjectKey(this.widget.routerModel.iconData),
-      padding: const EdgeInsets.all(12.0),
-      child: Card(
-        child: Center(
-          child: Icon(
-            this.widget.routerModel.iconData,
-            size: 128.0,
-            semanticLabel: 'Placeholder for ${this.widget.routerModel.label} tab',
-          ),
-        ),
-      ),
-    );
+    return TableList();
   }
 }
