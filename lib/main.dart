@@ -16,7 +16,7 @@ class MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    this._themeData = lightTheme;
+    this._themeData = darkTheme;
   }
 
   @override

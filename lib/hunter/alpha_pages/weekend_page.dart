@@ -1,7 +1,7 @@
 import 'package:flutter_web/material.dart';
 import 'package:h_design/hunter/router_model.dart';
-
-import 'table_list.dart';
+import 'package:h_design/hunter/widgets/filter_view.dart';
+import 'package:h_design/hunter/widgets/table_list.dart';
 
 class WeekendPage extends StatefulWidget {
   final RouterModel routerModel;
@@ -15,6 +15,15 @@ class WeekendPage extends StatefulWidget {
 class WeekendPageState extends State<WeekendPage> {
   @override
   Widget build(BuildContext context) {
-    return TableList();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        FilterView(),
+        Expanded(
+          child: TableList(),
+        ),
+      ],
+    );
   }
 }
