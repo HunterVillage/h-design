@@ -1,12 +1,13 @@
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
+import 'package:flutter_web/rendering.dart';
 import 'package:flutter_web_ui/ui.dart' as prefix0;
 
 class FilterView extends StatefulWidget {
   final bool expanded;
   final double expandedHeight;
 
-  FilterView({this.expanded = true, this.expandedHeight = 180.0});
+  FilterView({this.expanded = true, this.expandedHeight = 200.0});
 
   @override
   State<StatefulWidget> createState() => FilterViewState();
@@ -21,47 +22,50 @@ class FilterViewState extends State<FilterView> with SingleTickerProviderStateMi
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
-    _animation = Tween(begin: 35.0, end: this.widget.expandedHeight).animate(_controller)
+    _animation = Tween(begin: 36.0, end: this.widget.expandedHeight).animate(_controller)
       ..addListener(() {
         setState(() {});
       });
     this._expanded = this.widget.expanded;
     if (this._expanded) {
-      this._controller.forward(from: 35.0);
+      this._controller.forward(from: 36.0);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget _filterForm = ListView(
-      children: <Widget>[
-        Wrap(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: SizedBox(
-                width: 150,
-                height: 30,
-                child: TextField(
-                  enabled: true,
-                  decoration: const InputDecoration(
-                    labelText: '编号',
-                    border: OutlineInputBorder(),
+    Widget _filterForm = Padding(
+      padding: EdgeInsets.only(bottom: 46),
+      child: ListView(
+        children: <Widget>[
+          Wrap(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: SizedBox(
+                  width: 150,
+                  height: 30,
+                  child: TextField(
+                    enabled: true,
+                    decoration: const InputDecoration(
+                      labelText: '编号',
+                      border: OutlineInputBorder(),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
-    Widget _expandButton = Padding(
-      padding: EdgeInsets.only(bottom: 10),
-      child: Card(
-        color: Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.zero, bottom: prefix0.Radius.circular(7))),
-        margin: EdgeInsets.all(0),
-        child: InkWell(
+    Widget _expandButton = Card(
+      color: Theme.of(context).primaryColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.zero, bottom: prefix0.Radius.circular(7))),
+      margin: EdgeInsets.all(0),
+      child: InkWell(
+        child: Container(
+          padding: EdgeInsets.only(bottom: 6, top: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,11 +82,11 @@ class FilterViewState extends State<FilterView> with SingleTickerProviderStateMi
               ),
             ],
           ),
-          onTap: () {
-            this._expanded ? this._controller.reverse(from: this._animation.value) : this._controller.forward(from: this._animation.value);
-            this.setState(() => this._expanded = !this._expanded);
-          },
         ),
+        onTap: () {
+          this._expanded ? this._controller.reverse(from: this._animation.value) : this._controller.forward(from: this._animation.value);
+          this.setState(() => this._expanded = !this._expanded);
+        },
       ),
     );
     Widget _filterFormButton = Positioned(
@@ -109,28 +113,27 @@ class FilterViewState extends State<FilterView> with SingleTickerProviderStateMi
       bottom: 0,
       right: 10,
     );
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 3),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: this._animation.value,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                child: Stack(
-                  children: <Widget>[
-                    _filterForm,
-                    _filterFormButton,
-                  ],
-                ),
-                color: Theme.of(context).bottomAppBarColor,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: this._animation.value,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: Stack(
+                children: <Widget>[
+                  _filterForm,
+                  _filterFormButton,
+                ],
+              ),
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).primaryColor, width: 2),
               ),
             ),
-            _expandButton,
-          ],
-        ),
+          ),
+          _expandButton,
+        ],
       ),
     );
   }
