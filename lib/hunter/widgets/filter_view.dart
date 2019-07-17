@@ -1,7 +1,5 @@
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
-import 'package:flutter_web/rendering.dart';
-import 'package:flutter_web_ui/ui.dart' as prefix0;
 
 class FilterView extends StatefulWidget {
   final bool expanded;
@@ -61,7 +59,7 @@ class FilterViewState extends State<FilterView> with SingleTickerProviderStateMi
     );
     Widget _expandButton = Card(
       color: Theme.of(context).primaryColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.zero, bottom: prefix0.Radius.circular(7))),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.zero, bottom: Radius.circular(2))),
       margin: EdgeInsets.all(0),
       child: InkWell(
         child: Container(
