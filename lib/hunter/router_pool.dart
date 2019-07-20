@@ -12,7 +12,7 @@ List<RouterModel> indexModels = [
     id: 'alpha',
     iconData: Icons.format_paint,
     iconColor: Colors.pinkAccent,
-    title: '阿尔法',
+    title: 'Alpha',
     subTitle: '这是一个服务模块',
     sort: 0,
     routerHandler: (RouterModel routerModel) => TabPage(routerModel, AlphaModels),

@@ -31,8 +31,8 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
-    final double cardHeight = MediaQuery.of(context).size.width * 0.3333;
-    final double cardWidth = MediaQuery.of(context).size.height * 0.25;
+    final double cardWidth = MediaQuery.of(context).size.width * 0.3;
+    final double cardHeight = cardWidth * 0.45;
     Widget appBar = AppBar(
       leading: Icon(Icons.home),
       title: Text('H-Design'),
@@ -42,13 +42,16 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
     );
     Widget body = SafeArea(
       bottom: false,
-      child: Wrap(
-        children: indexModels.map((model) {
-          return GestureDetector(
-            child: MenuCard(model: model, height: cardHeight, width: cardWidth),
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => model.routerHandler(model))),
-          );
-        }).toList(),
+      child: Padding(
+        padding: EdgeInsets.only(top: 20),
+        child: Wrap(
+          children: indexModels.map((model) {
+            return GestureDetector(
+              child: MenuCard(model: model, height: cardHeight, width: cardWidth),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => model.routerHandler(model))),
+            );
+          }).toList(),
+        ),
       ),
     );
     return Scaffold(
