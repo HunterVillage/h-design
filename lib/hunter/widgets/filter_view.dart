@@ -5,7 +5,10 @@ class FilterView extends StatefulWidget {
   final bool expanded;
   final double expandedHeight;
 
-  FilterView({this.expanded = true, this.expandedHeight = 200.0});
+  FilterView({
+    this.expanded = false,
+    this.expandedHeight = 200.0,
+  });
 
   @override
   State<StatefulWidget> createState() => FilterViewState();
@@ -66,7 +69,7 @@ class FilterViewState extends State<FilterView> with SingleTickerProviderStateMi
               ),
               SizedBox(width: 10),
               Icon(
-                this._expanded ? Icons.expand_less : Icons.expand_more,
+                this._expanded ? Icons.expand_less : Icons.menu,
                 color: Colors.white,
                 size: 25,
               ),

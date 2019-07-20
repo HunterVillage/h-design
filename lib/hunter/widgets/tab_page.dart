@@ -35,7 +35,7 @@ class TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
           tag: this.widget.model.id,
           child: Icon(this.widget.model.iconData),
         ),
-        title: Text(this.widget.model.label),
+        title: Text(this.widget.model.title),
         actions: <Widget>[
           homeAction(context),
         ],
@@ -43,7 +43,7 @@ class TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
           controller: _controller,
           isScrollable: true,
           tabs: this.widget.pages.map<Tab>((RouterModel routerModel) {
-            return Tab(text: routerModel.label, icon: Icon(routerModel.iconData));
+            return Tab(text: routerModel.title, icon: Icon(routerModel.iconData));
           }).toList(),
         ),
       ),

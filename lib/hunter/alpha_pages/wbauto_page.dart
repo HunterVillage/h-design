@@ -21,7 +21,7 @@ class WbAutoPageState extends State<WbAutoPage> {
           child: Icon(
             this.widget.routerModel.iconData,
             size: 128.0,
-            semanticLabel: 'Placeholder for ${this.widget.routerModel.label} tab',
+            semanticLabel: 'Placeholder for ${this.widget.routerModel.title} tab',
           ),
         ),
       ),

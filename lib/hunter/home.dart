@@ -1,6 +1,8 @@
 import 'package:flutter_web/material.dart';
+import 'package:h_design/hunter/router_model.dart';
 import 'package:h_design/hunter/router_pool.dart';
 import 'package:h_design/hunter/actions.dart';
+import 'package:h_design/hunter/widgets/menul_card.dart';
 
 import 'custom_function.dart';
 
@@ -29,6 +31,8 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
+    final double cardHeight = MediaQuery.of(context).size.width * 0.3333;
+    final double cardWidth = MediaQuery.of(context).size.height * 0.25;
     Widget appBar = AppBar(
       leading: Icon(Icons.home),
       title: Text('H-Design'),
@@ -40,23 +44,9 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
       bottom: false,
       child: Wrap(
         children: indexModels.map((model) {
-          return SizedBox(
-            width: MediaQuery.of(context).size.width * 0.3333,
-            height: MediaQuery.of(context).size.height * 0.25,
-            child: Hero(
-              tag: model.id,
-              child: GestureDetector(
-                child: Card(
-                  child: Column(
-                    children: <Widget>[
-                      Expanded(flex: 4, child: Icon(model.iconData, size: 55)),
-                      Expanded(flex: 1, child: Text(model.label)),
-                    ],
-                  ),
-                ),
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => model.routerHandler(model))),
-              ),
-            ),
+          return GestureDetector(
+            child: MenuCard(model: model, height: cardHeight, width: cardWidth),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => model.routerHandler(model))),
           );
         }).toList(),
       ),
