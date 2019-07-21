@@ -53,7 +53,7 @@ class MenuCard extends StatelessWidget {
                         padding: EdgeInsets.only(right: 10),
                         child: Text(
                           model.title,
-                          style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold, fontFamily: 'Happy'),
+                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'Happy'),
                         ),
                       ),
                     ),

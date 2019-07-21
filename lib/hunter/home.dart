@@ -46,7 +46,7 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
             padding: EdgeInsets.only(top: 30),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 660,
+                maxCrossAxisExtent: 490,
                 crossAxisSpacing: 8.0,
                 mainAxisSpacing: 8.0,
                 childAspectRatio: 2.2,
@@ -55,7 +55,7 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
                 (BuildContext context, int index) {
                   final RouterModel model = indexModels[index];
                   return GestureDetector(
-                    child: MenuCard(model: model, height: 660 / 1.7, width: 660),
+                    child: MenuCard(model: model, height: 490 / 1.7, width: 490),
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => model.routerHandler(model))),
                   );
                 },
