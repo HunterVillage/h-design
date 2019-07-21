@@ -31,8 +31,6 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
-    final double cardWidth = MediaQuery.of(context).size.width * 0.3;
-    final double cardHeight = cardWidth * 0.45;
     Widget appBar = AppBar(
       leading: Icon(Icons.home),
       title: Text('H-Design'),
@@ -42,16 +40,30 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
     );
     Widget body = SafeArea(
       bottom: false,
-      child: Padding(
-        padding: EdgeInsets.only(top: 20),
-        child: Wrap(
-          children: indexModels.map((model) {
-            return GestureDetector(
-              child: MenuCard(model: model, height: cardHeight, width: cardWidth),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => model.routerHandler(model))),
-            );
-          }).toList(),
-        ),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverPadding(
+            padding: EdgeInsets.only(top: 30),
+            sliver: SliverGrid(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 660,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+                childAspectRatio: 2.2,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  final RouterModel model = indexModels[index];
+                  return GestureDetector(
+                    child: MenuCard(model: model, height: 660 / 1.7, width: 660),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => model.routerHandler(model))),
+                  );
+                },
+                childCount: indexModels.length,
+              ),
+            ),
+          ),
+        ],
       ),
     );
     return Scaffold(

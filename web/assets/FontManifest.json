@@ -54,5 +54,21 @@
         "asset": "Raleway-Regular.ttf"
       }
     ]
+  },
+  {
+    "family": "Happy",
+    "fonts": [
+      {
+        "asset": "FZZH-KXXXJJW.TTF"
+      }
+    ]
+  },
+  {
+    "family": "SongTi",
+    "fonts": [
+      {
+        "asset": "FZFengYKSJ_Zhun.TTF"
+      }
+    ]
   }
 ]
