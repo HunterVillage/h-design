@@ -22,6 +22,10 @@ class WeekendPageState extends State<WeekendPage> {
         FilterView(),
         Expanded(
           child: TableList(),
+//          child: SingleChildScrollView(
+//            scrollDirection: Axis.horizontal,
+//            child: TableList(),
+//          ),
         ),
       ],
     );

@@ -70,5 +70,13 @@
         "asset": "FZFengYKSJ_Zhun.TTF"
       }
     ]
+  },
+  {
+    "family": "FangZhengCuKaiJianTi",
+    "fonts": [
+      {
+        "asset": "FZCKJW.TTF"
+      }
+    ]
   }
 ]
