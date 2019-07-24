@@ -21,11 +21,10 @@ class WeekendPageState extends State<WeekendPage> {
       children: <Widget>[
         FilterView(),
         Expanded(
-          child: TableList(),
-//          child: SingleChildScrollView(
-//            scrollDirection: Axis.horizontal,
-//            child: TableList(),
-//          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: TableList(),
+          ),
         ),
       ],
     );
