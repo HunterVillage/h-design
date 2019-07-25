@@ -2,19 +2,28 @@ import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
 
 TextStyle headStyle = TextStyle(fontSize: 25, fontFamily: 'FangZhengCuKaiJianTi');
-TextStyle tailStyle = TextStyle(fontSize: 25, fontFamily: 'FangZhengCuKaiJianTi');
+List<TableItem> tableItems = [
+  TableItem(columnName: '编号', align: TableAlign.left),
+  TableItem(columnName: '名称', align: TableAlign.left),
+  TableItem(columnName: '库房', align: TableAlign.left),
+  TableItem(columnName: '生产日期', align: TableAlign.left),
+  TableItem(columnName: '单价', align: TableAlign.left),
+  TableItem(columnName: '金额', align: TableAlign.left),
+  TableItem(columnName: '状态', align: TableAlign.left),
+  TableItem(columnName: '备注', align: TableAlign.left)
+];
 
-class TableList<T> extends StatefulWidget {
+class ScrollTable<T> extends StatefulWidget {
   final List<String> columns;
   final List<T> data;
 
-  TableList({this.columns, this.data});
+  ScrollTable({this.columns, this.data});
 
   @override
-  State<StatefulWidget> createState() => TableListState();
+  State<StatefulWidget> createState() => ScrollTableState();
 }
 
-class TableListState extends State<TableList> {
+class ScrollTableState extends State<ScrollTable> {
   double _tableWidth = 1230;
 
   @override
@@ -29,50 +38,15 @@ class TableListState extends State<TableList> {
                 height: 45,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      width: 130,
-                      child: Text(
-                        '编号',
-                        style: headStyle,
-                      ),
-                    ),
-                    Container(
-                      width: 150,
-                      child: Text(
-                        '名称',
-                        style: headStyle,
-                      ),
-                    ),
-                    Container(
-                      width: 150,
-                      child: Text(
-                        '部门',
-                        style: headStyle,
-                      ),
-                    ),
-                    Container(
-                      width: 150,
-                      child: Text(
-                        '库房',
-                        style: headStyle,
-                      ),
-                    ),
-                    Container(
-                      width: 150,
-                      child: Text(
-                        '生产日期',
-                        style: headStyle,
-                      ),
-                    ),
-                    Container(
-                      width: 500,
-                      child: Text(
-                        '单价',
-                        style: headStyle,
-                      ),
-                    )
-                  ],
+                  children: tableItems
+                      .map((item) => Container(
+                            width: item.width,
+                            child: Text(
+                              item.columnName,
+                              style: headStyle,
+                            ),
+                          ))
+                      .toList(),
                 ),
               ),
             ],
@@ -106,4 +80,18 @@ class TableListState extends State<TableList> {
       ),
     );
   }
+}
+
+class TableItem {
+  final String columnName;
+  final double width;
+  final String align;
+  final String format;
+
+  TableItem({this.columnName, this.width = 150, this.align, this.format});
+}
+
+class TableAlign {
+  static final String left = 'left';
+  static final String right = 'right';
 }

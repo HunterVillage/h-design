@@ -3,6 +3,8 @@ import 'package:h_design/hunter/router_model.dart';
 import 'package:h_design/hunter/widgets/filter_view.dart';
 import 'package:h_design/hunter/widgets/table_list.dart';
 
+TextStyle tailStyle = TextStyle(fontSize: 20, fontFamily: 'FangZhengCuKaiJianTi');
+
 class WeekendPage extends StatefulWidget {
   final RouterModel routerModel;
 
@@ -17,11 +19,11 @@ class WeekendPageState extends State<WeekendPage> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         FilterView(),
         Expanded(
-          child: TableList(),
+          child: ScrollTable(),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
