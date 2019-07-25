@@ -21,11 +21,18 @@ class WeekendPageState extends State<WeekendPage> {
       children: <Widget>[
         FilterView(),
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: TableList(),
-          ),
+          child: TableList(),
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              '第 1 页',
+              style: tailStyle,
+            )
+          ],
+        )
       ],
     );
   }
