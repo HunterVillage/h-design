@@ -1,4 +1,4 @@
-//import 'dart:mirrors';
+import 'dart:mirrors';
 
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
@@ -58,12 +58,12 @@ class ScrollTableState extends State<ScrollTable> {
   double _tableWidth = columns.map((item) => item.width).reduce((value, element) => value + element);
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-//    InstanceMirror myClassInstanceMirror = reflect(dataList[0]);
-//    ClassMirror MyClassMirror = myClassInstanceMirror.type;
-//    for (var k in MyClassMirror.declarations.keys) {
-//      print(MirrorSystem.getName(k));
-//    }
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Column(
@@ -91,14 +91,19 @@ class ScrollTableState extends State<ScrollTable> {
             child: SizedBox(
               width: _tableWidth,
               child: ListView(
-                // TODO
+                // FIXME Thanks
                 children: dataList.map((element) {
+                  InstanceMirror im = reflect(element);
+                  ClassMirror cm = im.type;
+                  cm.declarations.forEach((name, declaration) {
+                    print(im.getField(name));
+                  });
                   return Row(
                     children: columns.map((column) {
                       return Container(
                         height: 40,
                         width: column.width,
-                        child: Text(element.name),
+                        child: Text(element.id),
                       );
                     }).toList(),
                   );
