@@ -4,7 +4,7 @@ import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
 
 TextStyle headStyle = TextStyle(fontSize: 25, fontFamily: 'FangZhengCuKaiJianTi');
-List<TableItem> tableItems = [
+List<TableItem> columns = [
   TableItem(bindId: 'id', columnName: '编号', align: TableAlign.left),
   TableItem(bindId: 'name', columnName: '名称', align: TableAlign.left),
   TableItem(bindId: 'warehouse', columnName: '库房', align: TableAlign.left),
@@ -45,17 +45,17 @@ List<TestModel> dataList = [
 ];
 
 class ScrollTable<T> extends StatefulWidget {
-  final List<String> columns;
-  final List<T> data;
+  final List<TableItem> columns;
+  final List<T> dataList;
 
-  ScrollTable({this.columns, this.data});
+  ScrollTable({this.columns, this.dataList});
 
   @override
   State<StatefulWidget> createState() => ScrollTableState();
 }
 
 class ScrollTableState extends State<ScrollTable> {
-  double _tableWidth = 1230;
+  double _tableWidth = columns.map((item) => item.width).reduce((value, element) => value + element);
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +74,14 @@ class ScrollTableState extends State<ScrollTable> {
                 height: 45,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: tableItems
-                      .map((item) => Container(
-                    width: item.width,
-                    child: Text(
-                      item.columnName,
-                      style: headStyle,
-                    ),
-                  ))
+                  children: columns
+                      .map((column) => Container(
+                            width: column.width,
+                            child: Text(
+                              column.columnName,
+                              style: headStyle,
+                            ),
+                          ))
                       .toList(),
                 ),
               ),
@@ -92,24 +92,17 @@ class ScrollTableState extends State<ScrollTable> {
               width: _tableWidth,
               child: ListView(
                 // TODO
-                children: List<Widget>.generate(
-                  20,
-                      (index) => Row(
-                    children: <Widget>[
-                      Container(
+                children: dataList.map((element) {
+                  return Row(
+                    children: columns.map((column) {
+                      return Container(
                         height: 40,
-                        width: 200,
-                        color: index % 2 == 0 ? Colors.orange : Colors.black54,
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 40,
-                          color: index % 2 == 0 ? Colors.deepOrangeAccent : Colors.teal,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                        width: column.width,
+                        child: Text(element.name),
+                      );
+                    }).toList(),
+                  );
+                }).toList(),
               ),
             ),
           )
