@@ -24,3 +24,10 @@ webdev serve --auto restart
 ```cmd
 webdev build
 ```
+
+#### View
+![](./web/assets/redme_image/1.png)
+![](./web/assets/redme_image/2.png)
+![](./web/assets/redme_image/3.png)
+![](./web/assets/redme_image/4.png)
+![](./web/assets/redme_image/5.png)
