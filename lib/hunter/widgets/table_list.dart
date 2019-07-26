@@ -1,18 +1,15 @@
-import 'dart:mirrors';
-
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
 
-TextStyle headStyle = TextStyle(fontSize: 25, fontFamily: 'FangZhengCuKaiJianTi');
 List<TableItem> columns = [
-  TableItem(bindId: 'id', columnName: '编号', align: TableAlign.left),
-  TableItem(bindId: 'name', columnName: '名称', align: TableAlign.left),
-  TableItem(bindId: 'warehouse', columnName: '库房', align: TableAlign.left),
-  TableItem(bindId: 'date', columnName: '生产日期', align: TableAlign.left),
-  TableItem(bindId: 'price', columnName: '单价', align: TableAlign.right),
-  TableItem(bindId: 'money', columnName: '金额', align: TableAlign.right),
-  TableItem(bindId: 'status', columnName: '状态', align: TableAlign.left),
-  TableItem(bindId: 'memo', columnName: '备注', align: TableAlign.left)
+  TableItem(bindId: 'id', columnName: '编号', align: FractionalOffset.centerLeft, width: 80),
+  TableItem(bindId: 'name', columnName: '名称'),
+  TableItem(bindId: 'warehouse', columnName: '库房'),
+  TableItem(bindId: 'date', columnName: '生产日期', width: 300),
+  TableItem(bindId: 'price', columnName: '单价', align: FractionalOffset.centerRight),
+  TableItem(bindId: 'money', columnName: '金额', align: FractionalOffset.centerRight),
+  TableItem(bindId: 'status', columnName: '状态'),
+  TableItem(bindId: 'memo', columnName: '备注', align: FractionalOffset.centerLeft, width: 500)
 ];
 
 class TestModel {
@@ -25,10 +22,30 @@ class TestModel {
   final String status;
   final String memo;
 
-  TestModel({this.id, this.name, this.warehouse, this.date, this.price, this.money, this.status, this.memo});
+  TestModel({
+    this.id,
+    this.name,
+    this.warehouse,
+    this.date,
+    this.price,
+    this.money,
+    this.status,
+    this.memo,
+  });
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'warehouse': warehouse,
+        'date': date,
+        'price': price,
+        'money': money,
+        'status': status,
+        'memo': memo,
+      };
 }
 
-List<TestModel> dataList = [
+List<TestModel> modelList = [
   TestModel(id: '001', name: '一次性血袋-001', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
   TestModel(id: '002', name: '一次性血袋-002', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
   TestModel(id: '003', name: '一次性血袋-003', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
@@ -42,7 +59,15 @@ List<TestModel> dataList = [
   TestModel(id: '011', name: '一次性血袋-011', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
   TestModel(id: '012', name: '一次性血袋-012', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
   TestModel(id: '013', name: '一次性血袋-013', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
+  TestModel(id: '014', name: '一次性血袋-013', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
+  TestModel(id: '015', name: '一次性血袋-013', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
+  TestModel(id: '016', name: '一次性血袋-013', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
+  TestModel(id: '017', name: '一次性血袋-013', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
+  TestModel(id: '018', name: '一次性血袋-013', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
+  TestModel(id: '019', name: '一次性血袋-013', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
+  TestModel(id: '020', name: '一次性血袋-013', warehouse: '中心库房', date: DateTime.now(), price: 200.0, money: 2000.0, status: '入库', memo: '备注一下'),
 ];
+List dataList = modelList.map((model) => model.toJson()).toList();
 
 class ScrollTable<T> extends StatefulWidget {
   final List<TableItem> columns;
@@ -76,10 +101,17 @@ class ScrollTableState extends State<ScrollTable> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: columns
                       .map((column) => Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Theme.of(context).backgroundColor, width: 0.1),
+                            ),
                             width: column.width,
-                            child: Text(
-                              column.columnName,
-                              style: headStyle,
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            child: Align(
+                              alignment: FractionalOffset.center,
+                              child: Text(
+                                column.columnName,
+                                style: headStyle,
+                              ),
                             ),
                           ))
                       .toList(),
@@ -91,19 +123,24 @@ class ScrollTableState extends State<ScrollTable> {
             child: SizedBox(
               width: _tableWidth,
               child: ListView(
-                // FIXME Thanks
                 children: dataList.map((element) {
-                  InstanceMirror im = reflect(element);
-                  ClassMirror cm = im.type;
-                  cm.declarations.forEach((name, declaration) {
-                    print(im.getField(name));
-                  });
                   return Row(
                     children: columns.map((column) {
+                      String value = element[column.bindId].toString();
                       return Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Theme.of(context).backgroundColor, width: 0.1),
+                        ),
                         height: 40,
                         width: column.width,
-                        child: Text(element.id),
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        child: Align(
+                          alignment: column.align,
+                          child: Text(
+                            value,
+                            style: valueStyle,
+                          ),
+                        ),
                       );
                     }).toList(),
                   );
@@ -121,13 +158,17 @@ class TableItem {
   final String bindId;
   final String columnName;
   final double width;
-  final String align;
+  final FractionalOffset align;
   final String format;
 
-  TableItem({@required this.bindId, this.columnName, this.width = 150, this.align, this.format});
+  TableItem({
+    @required this.bindId,
+    this.columnName,
+    this.width = 150,
+    this.align = FractionalOffset.center,
+    this.format,
+  });
 }
 
-class TableAlign {
-  static final String left = 'left';
-  static final String right = 'right';
-}
+TextStyle headStyle = TextStyle(fontSize: 25, fontFamily: 'FangZhengCuKaiJianTi');
+TextStyle valueStyle = TextStyle(fontSize: 17);
